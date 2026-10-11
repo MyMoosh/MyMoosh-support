@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyMoosh Support — AI Vocabulary Coach</title>
+  <meta name="description" content="Get help with MyMoosh, the AI-powered vocabulary learning app. Contact our support team or browse frequently asked questions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1525;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --accent: #1ed4b5;
+      --accent2: #7c6ff7;
+      --text: #f0f4ff;
+      --text-muted: #8b9cc8;
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; right: -150px; }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header { text-align: center; padding: 72px 0 48px; }
+
+    .mascot {
+      font-size: 72px;
+      display: block;
+      margin-bottom: 16px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin: 48px 0 32px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s;
+    }
+
+    .contact-card:hover { border-color: rgba(30, 212, 181, 0.3); }
+    .contact-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+    .contact-card p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 99px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 32px rgba(30,212,181,0.25);
+    }
+
+    .email-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(30,212,181,0.4); }
+
+    .response-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .faq-section { margin: 48px 0; }
+    .faq-section h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .faq-item:hover { border-color: rgba(124, 111, 247, 0.3); }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-icon { font-size: 1.2rem; color: var(--accent); flex-shrink: 0; transition: transform 0.3s; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 20px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 48px 0;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.3s;
+    }
+
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(30,212,181,0.25); }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .feature-card p  { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+    footer {
+      text-align: center;
+      padding: 48px 0 32px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+      margin-top: 48px;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header { padding: 48px 0 32px; }
+      .contact-card { padding: 28px 20px; }
+      .faq-question { font-size: 0.9rem; padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="container">
+
+    <header>
+      <span class="mascot">🦉</span>
+      <div class="badge">Support Center</div>
+      <h1>How can we help?</h1>
+      <p class="subtitle">
+        We're here to make your MyMoosh experience smooth and enjoyable.
+        Reach out anytime — we respond fast.
+      </p>
+    </header>
+
+    <div class="contact-card">
+      <h2>Contact Support</h2>
+      <p>Have a question, bug report, or feedback? Drop us an email and we'll get back to you.</p>
+      <a id="contact-email-btn" class="email-btn" href="mailto:samet09ergl@gmail.com?subject=MyMoosh%20Support%20Request">
+        ✉️ samet09ergl@gmail.com
+      </a>
+      <div class="response-time">
+        <span class="dot"></span>
+        Typical response time: within 24–48 hours
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Text Cleanup</h3>
+        <p>Paste any text and let AI extract key vocabulary for you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎴</div>
+        <h3>Flashcards &amp; Quizzes</h3>
+        <p>Practice with multiple interactive study modes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>5 Languages</h3>
+        <p>Full UI in English, Turkish, German, Spanish &amp; French.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>CEFR Levels</h3>
+        <p>Content matched to your A1–C2 proficiency level.</p>
+      </div>
+    </div>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item" id="faq-1">
+        <button class="faq-question" onclick="toggleFaq('faq-1')" aria-expanded="false">
+          How do I cancel my PRO subscription?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          You can cancel your PRO subscription at any time through your iPhone's Settings app.
+          Go to <strong>Settings → Apple ID → Subscriptions</strong>, find MyMoosh, and tap Cancel Subscription.
+          You'll keep access until the end of your billing period.
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq-2">
+        <button class="faq-question" onclick="toggleFaq('faq-2')" aria-expanded="false">
+          How does the AI text cleanup work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Simply paste any text — a news article, a paragraph, or an email — into the Smart Cleanup screen.
+          Our AI automatically identifies the most useful vocabulary and adds it with accurate translations
+          directly to your selected notebook.
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq-3">
+        <button class="faq-question" onclick="toggleFaq('faq-3')" aria-expanded="false">
+          My account isn't syncing — what should I do?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          First, make sure you have a stable internet connection. Then try logging out and back in.
+          If the issue persists, uninstall and reinstall the app — your data is stored securely in the cloud
+          and will be restored automatically when you sign in again.
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq-4">
+        <button class="faq-question" onclick="toggleFaq('faq-4')" aria-expanded="false">
+          Is my data private and secure?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Yes. MyMoosh routes all AI requests through a secure server-side proxy — your data never
+          touches third-party AI services directly from your device. We use Firebase Authentication
+          and never store sensitive personal information beyond what's needed to run your account.
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq-5">
+        <button class="faq-question" onclick="toggleFaq('faq-5')" aria-expanded="false">
+          Can I use MyMoosh on iPad?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Absolutely! MyMoosh is fully optimized for both iPhone and iPad with a responsive layout
+          that adapts beautifully to larger screens.
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq-6">
+        <button class="faq-question" onclick="toggleFaq('faq-6')" aria-expanded="false">
+          I found a bug — how do I report it?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          We appreciate bug reports! Please email us at <strong>samet09ergl@gmail.com</strong> with a
+          description of the issue, your device model, and iOS version. Screenshots or screen recordings
+          are very helpful. We aim to fix critical bugs within 48 hours.
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <p>🦉 <strong>MyMoosh</strong> — AI Vocabulary Coach</p>
+      <p style="margin-top:8px;">
+        Questions? Email us at
+        <a href="mailto:samet09ergl@gmail.com">samet09ergl@gmail.com</a>
+      </p>
+      <p style="margin-top:16px; font-size:0.78rem; opacity:0.5;">
+        &copy; 2026 MyMoosh. All rights reserved.
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleFaq(id) {
+      const item = document.getElementById(id);
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+      }
+    }
+  </script>
+
+</body>
+</html>
