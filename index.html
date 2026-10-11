@@ -12,17 +12,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #08100f;
-      --bg2:          #0d1a18;
-      --card:         rgba(255,255,255,0.04);
-      --card-border:  rgba(255,255,255,0.08);
-      --accent:       #1C796F;
-      --accent-light: #24a394;
-      --accent-glow:  #2ecfc0;
-      --accent2:      #134f48;
-      --text:         #e8f5f3;
-      --text-muted:   #7ab3ac;
-      --radius:       18px;
+      --bg:          #ddf4f1;       /* app light mode background - mint teal */
+      --bg2:         #c8ede9;
+      --card:        #ffffff;       /* white bubble cards like the app */
+      --card-border: rgba(28,121,111,0.1);
+      --shadow:      0 4px 24px rgba(28,121,111,0.10), 0 1px 4px rgba(28,121,111,0.06);
+      --shadow-hover:0 8px 40px rgba(28,121,111,0.18), 0 2px 8px rgba(28,121,111,0.08);
+      --accent:      #1C796F;
+      --accent-btn:  #1db8a4;
+      --accent-glow: #2ecfc0;
+      --text:        #1a3330;
+      --text-muted:  #5a8a84;
+      --radius:      20px;
     }
 
     html { scroll-behavior: smooth; }
@@ -35,209 +36,178 @@
       overflow-x: hidden;
     }
 
-    /* ── BACKGROUND ── */
-    .blob {
+    /* ── FLOATING BUBBLE CIRCLES (mimics app bg) ── */
+    .bg-bubble {
       position: fixed;
       border-radius: 50%;
-      filter: blur(130px);
-      opacity: 0.18;
       pointer-events: none;
       z-index: 0;
+      background: rgba(255,255,255,0.45);
     }
-    .blob-1 {
-      width: 700px; height: 700px;
-      background: var(--accent-light);
-      top: -250px; left: -250px;
-    }
-    .blob-2 {
-      width: 500px; height: 500px;
-      background: #0a4a43;
-      bottom: -180px; right: -180px;
-    }
-    .blob-3 {
-      width: 300px; height: 300px;
-      background: var(--accent-glow);
-      top: 40%; left: 60%;
-      opacity: 0.07;
-    }
+    .bg-bubble-1 { width: 340px; height: 340px; top: -100px; left: -100px; }
+    .bg-bubble-2 { width: 220px; height: 220px; top: 200px; right: -60px; }
+    .bg-bubble-3 { width: 180px; height: 180px; bottom: 280px; left: -50px; }
+    .bg-bubble-4 { width: 260px; height: 260px; bottom: -80px; right: -80px; }
+    .bg-bubble-5 { width: 120px; height: 120px; top: 55%; left: 45%; }
 
     /* ── LAYOUT ── */
     .container {
       position: relative;
       z-index: 1;
-      max-width: 780px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
     /* ── HEADER ── */
-    header { text-align: center; padding: 72px 0 48px; }
+    header { text-align: center; padding: 64px 0 40px; }
 
     .app-icon-wrap {
       display: inline-block;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       animation: float 5s ease-in-out infinite;
     }
 
     .app-icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 24px;
-      box-shadow:
-        0 0 0 1px rgba(44,207,192,0.3),
-        0 8px 40px rgba(28,121,111,0.5),
-        0 24px 80px rgba(28,121,111,0.2);
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(28,121,111,0.25), 0 2px 8px rgba(28,121,111,0.12);
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-1deg); }
-      50%       { transform: translateY(-14px) rotate(1deg); }
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
     }
 
     .badge {
       display: inline-block;
-      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      background: var(--accent);
       color: #fff;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 1.6px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       padding: 5px 16px;
       border-radius: 99px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
       font-weight: 800;
       line-height: 1.2;
-      background: linear-gradient(135deg, #e8f5f3 20%, var(--accent-glow));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 16px;
+      color: var(--accent);
+      margin-bottom: 14px;
     }
 
     .subtitle {
       font-size: 1.05rem;
       color: var(--text-muted);
-      max-width: 500px;
+      max-width: 480px;
       margin: 0 auto;
       line-height: 1.7;
     }
 
+    /* ── BUBBLE CARD (matches app cards) ── */
+    .bubble-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--card-border);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .bubble-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+
     /* ── CONTACT CARD ── */
     .contact-card {
-      background: linear-gradient(135deg, rgba(28,121,111,0.15), rgba(28,121,111,0.05));
-      border: 1px solid rgba(28,121,111,0.35);
-      border-radius: var(--radius);
-      padding: 40px;
-      margin: 48px 0 32px;
+      padding: 36px 32px;
+      margin: 40px 0 28px;
       text-align: center;
-      backdrop-filter: blur(16px);
-      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-    .contact-card:hover {
-      border-color: rgba(46,207,192,0.5);
-      box-shadow: 0 0 60px rgba(28,121,111,0.15);
-    }
-
-    .contact-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
-    .contact-card p  { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+    .contact-card h2 { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .contact-card p  { color: var(--text-muted); margin-bottom: 22px; font-size: 0.95rem; }
 
     .email-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      background: var(--accent-btn);
       color: #fff;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       padding: 14px 32px;
       border-radius: 99px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 32px rgba(28,121,111,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 20px rgba(28,121,111,0.3);
+      letter-spacing: 0.2px;
     }
 
     .email-btn:hover {
+      background: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 8px 48px rgba(46,207,192,0.4);
+      box-shadow: 0 8px 32px rgba(28,121,111,0.35);
     }
 
     .response-time {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 20px;
-      font-size: 0.85rem;
+      margin-top: 18px;
+      font-size: 0.84rem;
       color: var(--text-muted);
     }
 
     .dot {
       width: 8px; height: 8px;
-      background: var(--accent-glow);
+      background: var(--accent-btn);
       border-radius: 50%;
       display: inline-block;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(46,207,192,0.4); }
-      50%       { opacity: 0.6; transform: scale(0.85); box-shadow: 0 0 0 6px rgba(46,207,192,0); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
     }
 
-    /* ── DIVIDER ── */
-    .section-divider {
-      text-align: center;
-      font-size: 1.4rem;
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 0.75rem;
       font-weight: 700;
-      margin: 48px 0 24px;
-      color: var(--text);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 40px 0 14px 4px;
     }
 
-    /* ── FEATURES ── */
+    /* ── FEATURES GRID ── */
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 14px;
-      margin-bottom: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px;
     }
 
     .feature-card {
-      background: var(--card);
-      border: 1px solid rgba(28,121,111,0.2);
-      border-radius: var(--radius);
-      padding: 22px 18px;
+      padding: 22px 16px;
       text-align: center;
-      transition: transform 0.2s, border-color 0.3s, box-shadow 0.3s;
     }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(46,207,192,0.3);
-      box-shadow: 0 8px 32px rgba(28,121,111,0.15);
-    }
-
-    .feature-icon { font-size: 1.9rem; margin-bottom: 10px; }
-    .feature-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
-    .feature-card p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+    .feature-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .feature-card h3 { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+    .feature-card p  { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
 
     /* ── FAQ ── */
-    .faq-section { margin: 0 0 48px; }
-    .faq-section h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; text-align: center; }
-
     .faq-item {
-      background: var(--card);
-      border: 1px solid rgba(28,121,111,0.2);
-      border-radius: var(--radius);
       margin-bottom: 10px;
       overflow: hidden;
-      transition: border-color 0.3s;
     }
-
-    .faq-item:hover { border-color: rgba(46,207,192,0.3); }
 
     .faq-question {
       width: 100%;
@@ -245,22 +215,24 @@
       border: none;
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 600;
       text-align: left;
-      padding: 20px 24px;
+      padding: 18px 22px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      border-radius: var(--radius);
     }
 
     .faq-icon {
-      font-size: 1.2rem;
-      color: var(--accent-glow);
+      font-size: 1.1rem;
+      color: var(--accent-btn);
       flex-shrink: 0;
       transition: transform 0.3s;
+      font-weight: 400;
     }
 
     .faq-answer {
@@ -268,48 +240,52 @@
       overflow: hidden;
       transition: max-height 0.4s ease, padding 0.3s;
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.91rem;
       line-height: 1.75;
-      padding: 0 24px;
+      padding: 0 22px;
     }
 
-    .faq-item.open .faq-answer { max-height: 300px; padding: 0 24px 20px; }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 22px 18px; }
     .faq-item.open .faq-icon   { transform: rotate(45deg); }
+    .faq-item.open .faq-question { color: var(--accent); }
 
     /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 40px 0 32px;
+      padding: 36px 0 28px;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(28,121,111,0.2);
-      margin-top: 16px;
+      font-size: 0.84rem;
+      border-top: 1px solid rgba(28,121,111,0.15);
+      margin-top: 20px;
     }
 
-    footer a { color: var(--accent-glow); text-decoration: none; }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
     footer a:hover { text-decoration: underline; }
 
     .footer-logo {
-      width: 36px; height: 36px;
-      border-radius: 10px;
+      width: 32px; height: 32px;
+      border-radius: 9px;
       vertical-align: middle;
       margin-right: 8px;
-      box-shadow: 0 2px 12px rgba(28,121,111,0.4);
+      box-shadow: 0 2px 10px rgba(28,121,111,0.2);
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      header { padding: 48px 0 28px; }
-      .contact-card { padding: 28px 18px; }
-      .faq-question { font-size: 0.88rem; padding: 16px 18px; }
+      header { padding: 44px 0 28px; }
+      .contact-card { padding: 26px 18px; }
+      .faq-question { font-size: 0.88rem; padding: 16px 16px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+  <!-- Floating white bubbles like app background -->
+  <div class="bg-bubble bg-bubble-1"></div>
+  <div class="bg-bubble bg-bubble-2"></div>
+  <div class="bg-bubble bg-bubble-3"></div>
+  <div class="bg-bubble bg-bubble-4"></div>
+  <div class="bg-bubble bg-bubble-5"></div>
 
   <div class="container">
 
@@ -327,7 +303,7 @@
     </header>
 
     <!-- CONTACT CARD -->
-    <div class="contact-card">
+    <div class="bubble-card contact-card">
       <h2>📬 Contact Support</h2>
       <p>Have a question, bug report, or feedback? Drop us an email and we'll get back to you.</p>
       <a id="contact-email-btn" class="email-btn" href="mailto:samet09ergl@gmail.com?subject=MyMoosh%20Support%20Request">
@@ -340,106 +316,102 @@
     </div>
 
     <!-- FEATURES -->
-    <div class="section-divider">What's inside MyMoosh</div>
+    <div class="section-label">What's inside MyMoosh</div>
     <div class="features">
-      <div class="feature-card">
+      <div class="bubble-card feature-card">
         <div class="feature-icon">🤖</div>
         <h3>AI Text Cleanup</h3>
         <p>Paste any text and AI extracts key vocabulary instantly.</p>
       </div>
-      <div class="feature-card">
+      <div class="bubble-card feature-card">
         <div class="feature-icon">🎴</div>
         <h3>Flashcards &amp; Quizzes</h3>
         <p>Multiple interactive study modes to keep you engaged.</p>
       </div>
-      <div class="feature-card">
+      <div class="bubble-card feature-card">
         <div class="feature-icon">🌍</div>
         <h3>5 Languages</h3>
-        <p>Full UI in English, Turkish, German, Spanish &amp; French.</p>
+        <p>English, Turkish, German, Spanish &amp; French.</p>
       </div>
-      <div class="feature-card">
+      <div class="bubble-card feature-card">
         <div class="feature-icon">🎯</div>
         <h3>CEFR Levels</h3>
-        <p>Content matched to your A1–C2 proficiency level.</p>
+        <p>A1–C2 content matched to your proficiency.</p>
       </div>
     </div>
 
     <!-- FAQ -->
-    <section class="faq-section">
-      <h2>Frequently Asked Questions</h2>
+    <div class="section-label">Frequently Asked Questions</div>
 
-      <div class="faq-item" id="faq-1">
-        <button class="faq-question" onclick="toggleFaq('faq-1')" aria-expanded="false">
-          How do I cancel my PRO subscription?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          You can cancel at any time through your iPhone's Settings app.
-          Go to <strong>Settings → Apple ID → Subscriptions</strong>, find MyMoosh, and tap Cancel Subscription.
-          You'll keep PRO access until the end of your billing period.
-        </div>
+    <div class="bubble-card faq-item" id="faq-1">
+      <button class="faq-question" onclick="toggleFaq('faq-1')" aria-expanded="false">
+        How does the AI text cleanup work?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Paste any text — a news article, a paragraph, or an email — into the Smart Cleanup screen.
+        Our AI automatically identifies the most useful vocabulary and adds it with accurate translations
+        directly to your selected notebook.
       </div>
+    </div>
 
-      <div class="faq-item" id="faq-2">
-        <button class="faq-question" onclick="toggleFaq('faq-2')" aria-expanded="false">
-          How does the AI text cleanup work?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          Paste any text — a news article, a paragraph, or an email — into the Smart Cleanup screen.
-          Our AI automatically identifies the most useful vocabulary and adds it with accurate translations
-          directly to your selected notebook.
-        </div>
+    <div class="bubble-card faq-item" id="faq-2">
+      <button class="faq-question" onclick="toggleFaq('faq-2')" aria-expanded="false">
+        My account isn't syncing — what should I do?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        First, make sure you have a stable internet connection. Then try logging out and back in.
+        If the issue persists, uninstall and reinstall the app — your data is stored securely in the cloud
+        and will be restored automatically when you sign in again.
       </div>
+    </div>
 
-      <div class="faq-item" id="faq-3">
-        <button class="faq-question" onclick="toggleFaq('faq-3')" aria-expanded="false">
-          My account isn't syncing — what should I do?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          First, make sure you have a stable internet connection. Then try logging out and back in.
-          If the issue persists, uninstall and reinstall the app — your data is stored securely in the cloud
-          and will be restored automatically when you sign in again.
-        </div>
+    <div class="bubble-card faq-item" id="faq-3">
+      <button class="faq-question" onclick="toggleFaq('faq-3')" aria-expanded="false">
+        Is my data private and secure?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Yes. MyMoosh routes all AI requests through a secure server-side proxy — your data never
+        touches third-party AI services directly from your device. We use Firebase Authentication
+        and never store sensitive personal information beyond what's needed to run your account.
       </div>
+    </div>
 
-      <div class="faq-item" id="faq-4">
-        <button class="faq-question" onclick="toggleFaq('faq-4')" aria-expanded="false">
-          Is my data private and secure?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          Yes. MyMoosh routes all AI requests through a secure server-side proxy — your data never
-          touches third-party AI services directly from your device. We use Firebase Authentication
-          and never store sensitive personal information beyond what's needed to run your account.
-        </div>
+    <div class="bubble-card faq-item" id="faq-4">
+      <button class="faq-question" onclick="toggleFaq('faq-4')" aria-expanded="false">
+        Will MyMoosh be available on iPad?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        iPad support is coming soon! 🎉 We're actively working on a dedicated iPad experience.
+        Stay tuned for updates — it won't be long.
       </div>
+    </div>
 
-      <div class="faq-item" id="faq-5">
-        <button class="faq-question" onclick="toggleFaq('faq-5')" aria-expanded="false">
-          Can I use MyMoosh on iPad?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          Absolutely! MyMoosh is fully optimized for both iPhone and iPad with a responsive layout
-          that adapts beautifully to larger screens.
-        </div>
+    <div class="bubble-card faq-item" id="faq-5">
+      <button class="faq-question" onclick="toggleFaq('faq-5')" aria-expanded="false">
+        I found a bug — how do I report it?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        We appreciate bug reports! Please email us at <strong>samet09ergl@gmail.com</strong> with a
+        description of the issue, your device model, and iOS version. Screenshots or screen recordings
+        are very helpful. We aim to fix critical bugs within 48 hours.
       </div>
+    </div>
 
-      <div class="faq-item" id="faq-6">
-        <button class="faq-question" onclick="toggleFaq('faq-6')" aria-expanded="false">
-          I found a bug — how do I report it?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          We appreciate bug reports! Please email us at <strong>samet09ergl@gmail.com</strong> with a
-          description of the issue, your device model, and iOS version. Screenshots or screen recordings
-          are very helpful. We aim to fix critical bugs within 48 hours.
-        </div>
+    <div class="bubble-card faq-item" id="faq-6">
+      <button class="faq-question" onclick="toggleFaq('faq-6')" aria-expanded="false">
+        How do I delete my account?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        To delete your account and all associated data, please email us at <strong>samet09ergl@gmail.com</strong>
+        with the subject "Delete My Account". We will process your request within 7 business days.
       </div>
-
-    </section>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -450,7 +422,7 @@
       <p style="margin-top:10px;">
         Need help? <a href="mailto:samet09ergl@gmail.com">samet09ergl@gmail.com</a>
       </p>
-      <p style="margin-top:16px; font-size:0.78rem; opacity:0.45;">
+      <p style="margin-top:14px; font-size:0.76rem; opacity:0.5;">
         &copy; 2026 MyMoosh. All rights reserved.
       </p>
     </footer>
