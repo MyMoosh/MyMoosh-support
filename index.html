@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyMoosh Support — AI Vocabulary Coach</title>
-  <meta name="description" content="Get help with MyMoosh, the AI-powered vocabulary learning app. Contact our support team or browse frequently asked questions." />
+  <title id="meta-title">MyMoosh Support — AI Vocabulary Coach</title>
+  <meta name="description" id="meta-desc" content="Get help with MyMoosh, the AI-powered vocabulary learning app. Contact our support team or browse frequently asked questions." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -50,6 +50,63 @@
     .bg-bubble-4 { width: 260px; height: 260px; bottom: -80px; right: -80px; }
     .bg-bubble-5 { width: 120px; height: 120px; top: 55%; left: 45%; }
 
+    /* ── TOP NAV / LANGUAGE SELECTOR ── */
+    .top-nav {
+      position: relative;
+      z-index: 10;
+      padding: 20px 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 6px;
+      border-radius: 99px;
+      box-shadow: 0 4px 20px rgba(28,121,111,0.08), 0 1px 3px rgba(28,121,111,0.05);
+      border: 1px solid rgba(28,121,111,0.12);
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .lang-btn:hover {
+      color: var(--accent);
+      background: rgba(28,121,111,0.06);
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(28,121,111,0.25);
+    }
+
+    .lang-btn .flag {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
     /* ── LAYOUT ── */
     .container {
       position: relative;
@@ -60,7 +117,7 @@
     }
 
     /* ── HEADER ── */
-    header { text-align: center; padding: 64px 0 40px; }
+    header { text-align: center; padding: 44px 0 36px; }
 
     .app-icon-wrap {
       display: inline-block;
@@ -80,22 +137,22 @@
       50%       { transform: translateY(-10px); }
     }
 
-
-
     h1 {
       font-size: clamp(1.9rem, 5vw, 2.8rem);
       font-weight: 800;
       line-height: 1.2;
       color: var(--accent);
       margin-bottom: 14px;
+      transition: opacity 0.2s ease;
     }
 
     .subtitle {
       font-size: 1.05rem;
       color: var(--text-muted);
-      max-width: 480px;
+      max-width: 520px;
       margin: 0 auto;
       line-height: 1.7;
+      transition: opacity 0.2s ease;
     }
 
     /* ── BUBBLE CARD (matches app cards) ── */
@@ -114,12 +171,12 @@
     /* ── CONTACT CARD ── */
     .contact-card {
       padding: 36px 32px;
-      margin: 40px 0 28px;
+      margin: 36px 0 28px;
       text-align: center;
     }
 
     .contact-card h2 { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .contact-card p  { color: var(--text-muted); margin-bottom: 22px; font-size: 0.95rem; }
+    .contact-card p  { color: var(--text-muted); margin-bottom: 22px; font-size: 0.95rem; line-height: 1.6; }
 
     .email-btn {
       display: inline-flex;
@@ -234,7 +291,7 @@
       padding: 0 22px;
     }
 
-    .faq-item.open .faq-answer { max-height: 300px; padding: 0 22px 18px; }
+    .faq-item.open .faq-answer { max-height: 340px; padding: 0 22px 18px; }
     .faq-item.open .faq-icon   { transform: rotate(45deg); }
     .faq-item.open .faq-question { color: var(--accent); }
 
@@ -245,7 +302,7 @@
       color: var(--text-muted);
       font-size: 0.84rem;
       border-top: 1px solid rgba(28,121,111,0.15);
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
@@ -261,7 +318,10 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      header { padding: 44px 0 28px; }
+      .top-nav { padding: 14px 10px 0; }
+      .lang-switcher { width: 100%; max-width: 420px; }
+      .lang-btn { padding: 6px 10px; font-size: 0.78rem; gap: 4px; }
+      header { padding: 36px 0 24px; }
       .contact-card { padding: 26px 18px; }
       .faq-question { font-size: 0.88rem; padding: 16px 16px; }
     }
@@ -276,6 +336,27 @@
   <div class="bg-bubble bg-bubble-4"></div>
   <div class="bg-bubble bg-bubble-5"></div>
 
+  <!-- TOP LANGUAGE SWITCHER (App supported languages: EN, TR, DE, ES, FR) -->
+  <div class="top-nav">
+    <div class="lang-switcher" role="group" aria-label="Language Selector">
+      <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">
+        <span class="flag">🇬🇧</span> English
+      </button>
+      <button class="lang-btn" data-lang="tr" onclick="setLanguage('tr')">
+        <span class="flag">🇹🇷</span> Türkçe
+      </button>
+      <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">
+        <span class="flag">🇩🇪</span> Deutsch
+      </button>
+      <button class="lang-btn" data-lang="es" onclick="setLanguage('es')">
+        <span class="flag">🇪🇸</span> Español
+      </button>
+      <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">
+        <span class="flag">🇫🇷</span> Français
+      </button>
+    </div>
+  </div>
+
   <div class="container">
 
     <!-- HEADER -->
@@ -283,8 +364,8 @@
       <div class="app-icon-wrap">
         <img class="app-icon" src="icon.png" alt="MyMoosh App Icon" />
       </div>
-      <h1>How can we help?</h1>
-      <p class="subtitle">
+      <h1 id="header-title">How can we help?</h1>
+      <p class="subtitle" id="header-subtitle">
         We're here to make your MyMoosh experience smooth and enjoyable.
         Reach out anytime — we respond fast.
       </p>
@@ -292,51 +373,51 @@
 
     <!-- CONTACT CARD -->
     <div class="bubble-card contact-card">
-      <h2>📬 Contact Support</h2>
-      <p>Have a question, bug report, or feedback? Drop us an email and we'll get back to you.</p>
+      <h2 id="contact-heading">📬 Contact Support</h2>
+      <p id="contact-text">Have a question, bug report, or feedback? Drop us an email and we'll get back to you.</p>
       <a id="contact-email-btn" class="email-btn" href="mailto:samet09ergl@gmail.com?subject=MyMoosh%20Support%20Request">
         ✉️ samet09ergl@gmail.com
       </a>
       <div class="response-time">
         <span class="dot"></span>
-        Typical response time: within 24–48 hours
+        <span id="response-time-text">Typical response time: within 24–48 hours</span>
       </div>
     </div>
 
     <!-- FEATURES -->
-    <div class="section-label">What's inside MyMoosh</div>
+    <div class="section-label" id="section-features">What's inside MyMoosh</div>
     <div class="features">
       <div class="bubble-card feature-card">
         <div class="feature-icon">🤖</div>
-        <h3>AI Text Cleanup</h3>
-        <p>Paste any text and AI extracts key vocabulary instantly.</p>
+        <h3 id="feat-1-title">AI Text Cleanup</h3>
+        <p id="feat-1-desc">Paste any text and AI extracts key vocabulary instantly.</p>
       </div>
       <div class="bubble-card feature-card">
         <div class="feature-icon">🎴</div>
-        <h3>Flashcards &amp; Quizzes</h3>
-        <p>Multiple interactive study modes to keep you engaged.</p>
+        <h3 id="feat-2-title">Flashcards &amp; Quizzes</h3>
+        <p id="feat-2-desc">Multiple interactive study modes to keep you engaged.</p>
       </div>
       <div class="bubble-card feature-card">
         <div class="feature-icon">🌍</div>
-        <h3>5 Languages</h3>
-        <p>English, Turkish, German, Spanish &amp; French.</p>
+        <h3 id="feat-3-title">5 Languages</h3>
+        <p id="feat-3-desc">English, Turkish, German, Spanish &amp; French.</p>
       </div>
       <div class="bubble-card feature-card">
         <div class="feature-icon">🎯</div>
-        <h3>CEFR Levels</h3>
-        <p>A1–C2 content matched to your proficiency.</p>
+        <h3 id="feat-4-title">CEFR Levels</h3>
+        <p id="feat-4-desc">A1–C2 content matched to your proficiency.</p>
       </div>
     </div>
 
     <!-- FAQ -->
-    <div class="section-label">Frequently Asked Questions</div>
+    <div class="section-label" id="section-faq">Frequently Asked Questions</div>
 
     <div class="bubble-card faq-item" id="faq-1">
       <button class="faq-question" onclick="toggleFaq('faq-1')" aria-expanded="false">
-        How does the AI text cleanup work?
+        <span id="faq-1-q">How does the AI text cleanup work?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-1-a">
         Paste any text — a news article, a paragraph, or an email — into the Smart Cleanup screen.
         Our AI automatically identifies the most useful vocabulary and adds it with accurate translations
         directly to your selected notebook.
@@ -345,10 +426,10 @@
 
     <div class="bubble-card faq-item" id="faq-2">
       <button class="faq-question" onclick="toggleFaq('faq-2')" aria-expanded="false">
-        My account isn't syncing — what should I do?
+        <span id="faq-2-q">My account isn't syncing — what should I do?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-2-a">
         First, make sure you have a stable internet connection. Then try logging out and back in.
         If the issue persists, uninstall and reinstall the app — your data is stored securely in the cloud
         and will be restored automatically when you sign in again.
@@ -357,10 +438,10 @@
 
     <div class="bubble-card faq-item" id="faq-3">
       <button class="faq-question" onclick="toggleFaq('faq-3')" aria-expanded="false">
-        Is my data private and secure?
+        <span id="faq-3-q">Is my data private and secure?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-3-a">
         Yes. MyMoosh routes all AI requests through a secure server-side proxy — your data never
         touches third-party AI services directly from your device. We use Firebase Authentication
         and never store sensitive personal information beyond what's needed to run your account.
@@ -369,10 +450,10 @@
 
     <div class="bubble-card faq-item" id="faq-4">
       <button class="faq-question" onclick="toggleFaq('faq-4')" aria-expanded="false">
-        Will MyMoosh be available on iPad?
+        <span id="faq-4-q">Will MyMoosh be available on iPad?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-4-a">
         iPad support is coming soon! 🎉 We're actively working on a dedicated iPad experience.
         Stay tuned for updates — it won't be long.
       </div>
@@ -380,10 +461,10 @@
 
     <div class="bubble-card faq-item" id="faq-5">
       <button class="faq-question" onclick="toggleFaq('faq-5')" aria-expanded="false">
-        I found a bug — how do I report it?
+        <span id="faq-5-q">I found a bug — how do I report it?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-5-a">
         We appreciate bug reports! Please email us at <strong>samet09ergl@gmail.com</strong> with a
         description of the issue, your device model, and iOS version. Screenshots or screen recordings
         are very helpful. We aim to fix critical bugs within 48 hours.
@@ -392,10 +473,10 @@
 
     <div class="bubble-card faq-item" id="faq-6">
       <button class="faq-question" onclick="toggleFaq('faq-6')" aria-expanded="false">
-        How do I delete my account?
+        <span id="faq-6-q">How do I delete my account?</span>
         <span class="faq-icon">+</span>
       </button>
-      <div class="faq-answer">
+      <div class="faq-answer" id="faq-6-a">
         To delete your account and all associated data, please email us at <strong>samet09ergl@gmail.com</strong>
         with the subject "Delete My Account". We will process your request within 7 business days.
       </div>
@@ -405,19 +486,255 @@
     <footer>
       <p>
         <img class="footer-logo" src="icon.png" alt="MyMoosh" />
-        <strong>MyMoosh</strong> — Your Vocabulary Coach
+        <strong>MyMoosh</strong> — <span id="footer-tagline">Your Vocabulary Coach</span>
       </p>
       <p style="margin-top:10px;">
-        Need help? <a href="mailto:samet09ergl@gmail.com">samet09ergl@gmail.com</a>
+        <span id="footer-need-help">Need help?</span> <a href="mailto:samet09ergl@gmail.com">samet09ergl@gmail.com</a>
       </p>
       <p style="margin-top:14px; font-size:0.76rem; opacity:0.5;">
-        &copy; 2026 MyMoosh. All rights reserved.
+        &copy; 2026 MyMoosh. <span id="footer-rights">All rights reserved.</span>
       </p>
     </footer>
 
   </div>
 
   <script>
+    const translations = {
+      en: {
+        pageTitle: "MyMoosh Support — AI Vocabulary Coach",
+        headerTitle: "How can we help?",
+        headerSubtitle: "We're here to make your MyMoosh experience smooth and enjoyable. Reach out anytime — we respond fast.",
+        contactHeading: "📬 Contact Support",
+        contactText: "Have a question, bug report, or feedback? Drop us an email and we'll get back to you.",
+        responseTime: "Typical response time: within 24–48 hours",
+        emailSubject: "MyMoosh Support Request",
+        sectionFeatures: "What's inside MyMoosh",
+        feat1Title: "AI Text Cleanup",
+        feat1Desc: "Paste any text and AI extracts key vocabulary instantly.",
+        feat2Title: "Flashcards & Quizzes",
+        feat2Desc: "Multiple interactive study modes to keep you engaged.",
+        feat3Title: "5 Languages",
+        feat3Desc: "English, Turkish, German, Spanish & French.",
+        feat4Title: "CEFR Levels",
+        feat4Desc: "A1–C2 content matched to your proficiency.",
+        sectionFaq: "Frequently Asked Questions",
+        faq1Q: "How does the AI text cleanup work?",
+        faq1A: "Paste any text — a news article, a paragraph, or an email — into the Smart Cleanup screen. Our AI automatically identifies the most useful vocabulary and adds it with accurate translations directly to your selected notebook.",
+        faq2Q: "My account isn't syncing — what should I do?",
+        faq2A: "First, make sure you have a stable internet connection. Then try logging out and back in. If the issue persists, uninstall and reinstall the app — your data is stored securely in the cloud and will be restored automatically when you sign in again.",
+        faq3Q: "Is my data private and secure?",
+        faq3A: "Yes. MyMoosh routes all AI requests through a secure server-side proxy — your data never touches third-party AI services directly from your device. We use Firebase Authentication and never store sensitive personal information beyond what's needed to run your account.",
+        faq4Q: "Will MyMoosh be available on iPad?",
+        faq4A: "iPad support is coming soon! 🎉 We're actively working on a dedicated iPad experience. Stay tuned for updates — it won't be long.",
+        faq5Q: "I found a bug — how do I report it?",
+        faq5A: "We appreciate bug reports! Please email us at <strong>samet09ergl@gmail.com</strong> with a description of the issue, your device model, and iOS version. Screenshots or screen recordings are very helpful. We aim to fix critical bugs within 48 hours.",
+        faq6Q: "How do I delete my account?",
+        faq6A: "To delete your account and all associated data, please email us at <strong>samet09ergl@gmail.com</strong> with the subject \"Delete My Account\". We will process your request within 7 business days.",
+        footerTagline: "Your Vocabulary Coach",
+        footerNeedHelp: "Need help?",
+        footerRights: "All rights reserved."
+      },
+      tr: {
+        pageTitle: "MyMoosh Destek — Yapay Zeka Kelime Koçun",
+        headerTitle: "Nasıl yardımcı olabiliriz?",
+        headerSubtitle: "MyMoosh deneyiminizi sorunsuz ve keyifli kılmak için buradayız. İstediğiniz zaman bize ulaşın — hızlıca yanıt veriyoruz.",
+        contactHeading: "📬 Destek ile İletişime Geçin",
+        contactText: "Bir sorunuz, hata bildiriminiz veya geri bildiriminiz mi var? Bize e-posta gönderin, en kısa sürede dönüş yapalım.",
+        responseTime: "Ortalama yanıt süresi: 24–48 saat içinde",
+        emailSubject: "MyMoosh Destek Talebi",
+        sectionFeatures: "MyMoosh'ta Neler Var?",
+        feat1Title: "Yapay Zeka Metin Temizleme",
+        feat1Desc: "Herhangi bir metni yapıştırın; yapay zeka önemli kelimeleri anında çıkarsın.",
+        feat2Title: "Kartlar ve Testler",
+        feat2Desc: "Öğrenmeyi pekiştiren eğlenceli ve etkileşimli çalışma modları.",
+        feat3Title: "5 Dil Desteği",
+        feat3Desc: "Türkçe, İngilizce, Almanca, İspanyolca ve Fransızca.",
+        feat4Title: "CEFR Seviyeleri",
+        feat4Desc: "Seviyenize uygun A1'den C2'ye özel içerikler.",
+        sectionFaq: "Sıkça Sorulan Sorular",
+        faq1Q: "Yapay zeka metin temizleme nasıl çalışır?",
+        faq1A: "Haber makalesi, paragraf veya e-posta gibi herhangi bir metni Hızlı Yapıştır ekranına yapıştırın. Yapay zekamız en faydalı kelimeleri otomatik olarak tespit eder ve doğru çevirileriyle doğrudan seçtiğiniz deftere ekler.",
+        faq2Q: "Hesabım eşitlenmiyor, ne yapmalıyım?",
+        faq2A: "Öncelikle internet bağlantınızın stabil olduğundan emin olun. Ardından oturumu kapatıp tekrar açmayı deneyin. Sorun devam ederse uygulamayı silip yeniden yükleyin; verileriniz bulutta güvenle saklanır ve tekrar giriş yaptığınızda otomatik olarak geri yüklenir.",
+        faq3Q: "Verilerim gizli ve güvende mi?",
+        faq3A: "Evet. MyMoosh tüm yapay zeka isteklerini güvenli bir sunucu vekil (proxy) üzerinden iletir — verileriniz cihazınızdan doğrudan üçüncü taraf yapay zeka servislerine gitmez. Firebase Kimlik Doğrulama kullanıyoruz ve hesabınızı çalıştırmak için gerekenden fazla kişisel veri saklamıyoruz.",
+        faq4Q: "MyMoosh iPad'de kullanılabilecek mi?",
+        faq4A: "iPad desteği çok yakında geliyor! 🎉 iPad için özel olarak optimize edilmiş harika bir deneyim üzerinde aktif olarak çalışıyoruz. Güncellemeleri takipte kalın.",
+        faq5Q: "Bir hata (bug) buldum, nasıl bildirebilirim?",
+        faq5A: "Hata bildirimleriniz bizim için çok değerli! Lütfen sorunun açıklamasını, cihaz modelinizi ve iOS sürümünüzü <strong>samet09ergl@gmail.com</strong> adresine e-posta ile iletin. Ekran görüntüleri veya video kayıtları teşhis için çok faydalıdır. Kritik hataları 48 saat içinde çözmeyi hedefliyoruz.",
+        faq6Q: "Hesabımı nasıl silebilirim?",
+        faq6A: "Hesabınızı ve tüm ilişkili verilerinizi silmek için lütfen \"Delete My Account\" veya \"Hesabımı Sil\" konu başlığıyla <strong>samet09ergl@gmail.com</strong> adresine e-posta gönderin. Talebiniz 7 iş günü içinde tamamlanacaktır.",
+        footerTagline: "Kelime Koçun",
+        footerNeedHelp: "Yardıma mı ihtiyacınız var?",
+        footerRights: "Tüm hakları saklıdır."
+      },
+      de: {
+        pageTitle: "MyMoosh Support — Dein KI-Vokabeltrainer",
+        headerTitle: "Wie können wir dir helfen?",
+        headerSubtitle: "Wir sind hier, um deine MyMoosh-Erfahrung so reibungslos wie möglich zu gestalten. Schreib uns jederzeit — wir antworten schnell.",
+        contactHeading: "📬 Support kontaktieren",
+        contactText: "Hast du eine Frage, einen Fehler gefunden oder Feedback? Schreib uns eine E-Mail und wir melden uns bei dir.",
+        responseTime: "Typische Antwortzeit: innerhalb von 24–48 Stunden",
+        emailSubject: "MyMoosh Support Anfrage",
+        sectionFeatures: "Das steckt in MyMoosh",
+        feat1Title: "KI-Textbereinigung",
+        feat1Desc: "Füge beliebigen Text ein und die KI extrahiert sofort die wichtigsten Vokabeln.",
+        feat2Title: "Karteikarten & Quizze",
+        feat2Desc: "Mehrere interaktive Lernmodi für maximalen Lernerfolg.",
+        feat3Title: "5 Sprachen",
+        feat3Desc: "Deutsch, Englisch, Türkisch, Spanisch & Französisch.",
+        feat4Title: "GER-Stufen (CEFR)",
+        feat4Desc: "A1–C2 Inhalte, perfekt abgestimmt auf dein Sprachniveau.",
+        sectionFaq: "Häufig gestellte Fragen",
+        faq1Q: "Wie funktioniert die KI-Textbereinigung?",
+        faq1A: "Füge einen beliebigen Text — z. B. einen Nachrichtenartikel oder eine E-Mail — in die Smart-Cleanup-Maske ein. Unsere KI erkennt automatisch die wichtigsten Vokabeln und fügt sie mit präzisen Übersetzungen direkt deinem Vokabelheft hinzu.",
+        faq2Q: "Mein Konto synchronisiert nicht — was kann ich tun?",
+        faq2A: "Prüfe zunächst deine Internetverbindung. Melde dich dann ab und wieder an. Falls das Problem weiterhin besteht, installiere die App neu — deine Daten sind sicher in der Cloud gespeichert und werden beim erneuten Anmelden wiederhergestellt.",
+        faq3Q: "Sind meine Daten privat und geschützt?",
+        faq3A: "Ja. MyMoosh leitet alle KI-Anfragen über einen sicheren serverseitigen Proxy — deine Daten berühren niemals direkt Drittanbieter-KI-Dienste. Wir nutzen Firebase Authentication und speichern keine unnötigen sensiblen Daten.",
+        faq4Q: "Wird MyMoosh für das iPad verfügbar sein?",
+        faq4A: "iPad-Unterstützung kommt bald! 🎉 Wir arbeiten mit Hochdruck an einem maßgeschneiderten iPad-Erlebnis. Es dauert nicht mehr lange.",
+        faq5Q: "Ich habe einen Fehler gefunden — wie melde ich ihn?",
+        faq5A: "Wir freuen uns über Feedback! Bitte sende uns eine E-Mail an <strong>samet09ergl@gmail.com</strong> mit einer Beschreibung des Fehlers, deinem Gerätemodell und deiner iOS-Version. Screenshots sind sehr hilfreich. Wir beheben kritische Fehler in der Regel innerhalb von 48 Stunden.",
+        faq6Q: "Wie kann ich mein Konto löschen?",
+        faq6A: "Um dein Konto und alle zugehörigen Daten zu löschen, sende bitte eine E-Mail mit dem Betreff „Delete My Account“ an <strong>samet09ergl@gmail.com</strong>. Deine Anfrage wird innerhalb von 7 Werktagen bearbeitet.",
+        footerTagline: "Dein Vokabeltrainer",
+        footerNeedHelp: "Brauchst du Hilfe?",
+        footerRights: "Alle Rechte vorbehalten."
+      },
+      es: {
+        pageTitle: "Soporte de MyMoosh — Tu Entrenador de Vocabulario con IA",
+        headerTitle: "¿Cómo podemos ayudarte?",
+        headerSubtitle: "Estamos aquí para hacer que tu experiencia con MyMoosh sea perfecta y agradable. Contáctanos cuando quieras — respondemos rápido.",
+        contactHeading: "📬 Contactar con Soporte",
+        contactText: "¿Tienes alguna pregunta, reporte de error o sugerencia? Envíanos un correo y te responderemos pronto.",
+        responseTime: "Tiempo de respuesta habitual: en 24–48 horas",
+        emailSubject: "Soporte MyMoosh",
+        sectionFeatures: "Lo que incluye MyMoosh",
+        feat1Title: "Limpieza de Texto con IA",
+        feat1Desc: "Pega cualquier texto y la IA extraerá el vocabulario clave al instante.",
+        feat2Title: "Tarjetas y Cuestionarios",
+        feat2Desc: "Múltiples modos de estudio interactivos para mantener tu motivación.",
+        feat3Title: "5 Idiomas",
+        feat3Desc: "Español, Inglés, Turco, Alemán y Francés.",
+        feat4Title: "Niveles MCER (CEFR)",
+        feat4Desc: "Contenido adaptado desde nivel A1 hasta C2 según tu nivel.",
+        sectionFaq: "Preguntas Frecuentes",
+        faq1Q: "¿Cómo funciona la limpieza de texto con IA?",
+        faq1A: "Pega cualquier texto —un artículo de noticias, un párrafo o un correo— en la pantalla de Limpieza Inteligente. Nuestra IA identifica automáticamente el vocabulario más relevante y lo añade con traducciones exactas a tu cuaderno.",
+        faq2Q: "Mi cuenta no se sincroniza, ¿qué debo hacer?",
+        faq2A: "Primero comprueba que tienes una conexión a internet estable. Luego intenta cerrar sesión y volver a iniciarla. Si el problema continúa, reinstala la aplicación — tus datos se guardan de forma segura en la nube y se restaurarán automáticamente.",
+        faq3Q: "¿Mis datos están protegidos y son privados?",
+        faq3A: "Sí. MyMoosh gestiona todas las solicitudes de IA mediante un proxy seguro en el servidor; tus datos nunca contactan directamente con servicios de IA de terceros. Utilizamos Firebase Authentication y no almacenamos datos personales innecesarios.",
+        faq4Q: "¿Estará MyMoosh disponible en iPad?",
+        faq4A: "¡El soporte para iPad llegará muy pronto! 🎉 Estamos trabajando activamente en una experiencia diseñada especialmente para iPad. Muy pronto habrá novedades.",
+        faq5Q: "He encontrado un error, ¿cómo lo reporto?",
+        faq5A: "¡Agradecemos mucho los reportes de errores! Escríbenos a <strong>samet09ergl@gmail.com</strong> indicando el problema, tu modelo de dispositivo y versión de iOS. Las capturas o vídeos son de gran ayuda. Procuramos resolver problemas críticos en 48 horas.",
+        faq6Q: "¿Cómo elimino mi cuenta?",
+        faq6A: "Para eliminar tu cuenta y todos los datos asociados, envía un correo a <strong>samet09ergl@gmail.com</strong> con el asunto \"Delete My Account\". Procesaremos tu solicitud en un plazo de 7 días hábiles.",
+        footerTagline: "Tu Entrenador de Vocabulario",
+        footerNeedHelp: "¿Necesitas ayuda?",
+        footerRights: "Todos los derechos reservados."
+      },
+      fr: {
+        pageTitle: "Support MyMoosh — Votre Coach de Vocabulaire IA",
+        headerTitle: "Comment pouvons-nous vous aider ?",
+        headerSubtitle: "Nous sommes là pour rendre votre expérience MyMoosh fluide et agréable. Contactez-nous à tout moment — nous répondons rapidement.",
+        contactHeading: "📬 Contacter le Support",
+        contactText: "Une question, un bug à signaler ou une suggestion ? Envoyez-nous un e-mail et nous vous répondrons dans les plus brefs délais.",
+        responseTime: "Délai de réponse habituel : sous 24 à 48 heures",
+        emailSubject: "Demande de Support MyMoosh",
+        sectionFeatures: "Ce que propose MyMoosh",
+        feat1Title: "Nettoyage de Texte IA",
+        feat1Desc: "Collez n'importe quel texte et l'IA extrait instantanément le vocabulaire clé.",
+        feat2Title: "Flashcards & Quiz",
+        feat2Desc: "Plusieurs modes d'étude interactifs pour booster votre apprentissage.",
+        feat3Title: "5 Langues",
+        feat3Desc: "Français, Anglais, Turc, Allemand et Espagnol.",
+        feat4Title: "Niveaux CECRL",
+        feat4Desc: "Contenu de A1 à C2 parfaitement adapté à votre niveau.",
+        sectionFaq: "Foire Aux Questions",
+        faq1Q: "Comment fonctionne le nettoyage de texte par l'IA ?",
+        faq1A: "Collez n'importe quel texte — un article d'actualité, un paragraphe ou un e-mail — dans l'écran de nettoyage intelligent. Notre IA détecte automatiquement le vocabulaire essentiel et l'ajoute avec des traductions précises à votre carnet.",
+        faq2Q: "Mon compte ne se synchronise pas, que faire ?",
+        faq2A: "Vérifiez d'abord la stabilité de votre connexion internet. Ensuite, déconnectez-vous puis reconnectez-vous. Si le souci persiste, réinstallez l'application — vos données sont stockées en toute sécurité dans le cloud et seront restaurées automatiquement.",
+        faq3Q: "Mes données sont-elles privées et sécurisées ?",
+        faq3A: "Oui. MyMoosh achemine toutes les requêtes IA via un serveur proxy sécurisé — vos données n'entrent jamais en contact direct avec des services IA tiers. Nous utilisons Firebase Authentication et ne conservons aucune information sensible inutile.",
+        faq4Q: "MyMoosh sera-t-il disponible sur iPad ?",
+        faq4A: "La compatibilité iPad arrive très bientôt ! 🎉 Nous développons activement une expérience dédiée pour iPad. Restez à l'écoute !",
+        faq5Q: "J'ai trouvé un bug, comment le signaler ?",
+        faq5A: "Vos retours nous sont très précieux ! Écrivez-nous à <strong>samet09ergl@gmail.com</strong> avec une description du problème, votre modèle d'appareil et version d'iOS. Des captures d'écran sont très utiles. Nous traitons les bugs critiques sous 48 heures.",
+        faq6Q: "Comment supprimer mon compte ?",
+        faq6A: "Pour supprimer votre compte et toutes les données associées, veuillez nous écrire à <strong>samet09ergl@gmail.com</strong> avec pour objet « Delete My Account ». Votre demande sera traitée sous 7 jours ouvrés.",
+        footerTagline: "Votre Coach de Vocabulaire",
+        footerNeedHelp: "Besoin d'aide ?",
+        footerRights: "Tous droits réservés."
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+
+      // Update Header
+      document.getElementById('header-title').textContent = t.headerTitle;
+      document.getElementById('header-subtitle').textContent = t.headerSubtitle;
+
+      // Update Contact
+      document.getElementById('contact-heading').textContent = t.contactHeading;
+      document.getElementById('contact-text').textContent = t.contactText;
+      document.getElementById('response-time-text').textContent = t.responseTime;
+      document.getElementById('contact-email-btn').href = `mailto:samet09ergl@gmail.com?subject=${encodeURIComponent(t.emailSubject)}`;
+
+      // Update Features
+      document.getElementById('section-features').textContent = t.sectionFeatures;
+      document.getElementById('feat-1-title').textContent = t.feat1Title;
+      document.getElementById('feat-1-desc').textContent = t.feat1Desc;
+      document.getElementById('feat-2-title').textContent = t.feat2Title;
+      document.getElementById('feat-2-desc').textContent = t.feat2Desc;
+      document.getElementById('feat-3-title').textContent = t.feat3Title;
+      document.getElementById('feat-3-desc').textContent = t.feat3Desc;
+      document.getElementById('feat-4-title').textContent = t.feat4Title;
+      document.getElementById('feat-4-desc').textContent = t.feat4Desc;
+
+      // Update FAQ
+      document.getElementById('section-faq').textContent = t.sectionFaq;
+      document.getElementById('faq-1-q').textContent = t.faq1Q;
+      document.getElementById('faq-1-a').innerHTML = t.faq1A;
+      document.getElementById('faq-2-q').textContent = t.faq2Q;
+      document.getElementById('faq-2-a').innerHTML = t.faq2A;
+      document.getElementById('faq-3-q').textContent = t.faq3Q;
+      document.getElementById('faq-3-a').innerHTML = t.faq3A;
+      document.getElementById('faq-4-q').textContent = t.faq4Q;
+      document.getElementById('faq-4-a').innerHTML = t.faq4A;
+      document.getElementById('faq-5-q').textContent = t.faq5Q;
+      document.getElementById('faq-5-a').innerHTML = t.faq5A;
+      document.getElementById('faq-6-q').textContent = t.faq6Q;
+      document.getElementById('faq-6-a').innerHTML = t.faq6A;
+
+      // Update Footer
+      document.getElementById('footer-tagline').textContent = t.footerTagline;
+      document.getElementById('footer-need-help').textContent = t.footerNeedHelp;
+      document.getElementById('footer-rights').textContent = t.footerRights;
+
+      // Update Buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Save preference
+      try {
+        localStorage.setItem('mymoosh_lang', lang);
+      } catch (e) {}
+    }
+
     function toggleFaq(id) {
       const item = document.getElementById(id);
       const isOpen = item.classList.contains('open');
@@ -430,6 +747,33 @@
         item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
       }
     }
+
+    // Initialize Language
+    (function initLanguage() {
+      let savedLang = null;
+      try {
+        savedLang = localStorage.getItem('mymoosh_lang');
+      } catch (e) {}
+
+      if (savedLang && translations[savedLang]) {
+        setLanguage(savedLang);
+        return;
+      }
+
+      // Check browser language
+      const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      if (userLang.startsWith('tr')) {
+        setLanguage('tr');
+      } else if (userLang.startsWith('de')) {
+        setLanguage('de');
+      } else if (userLang.startsWith('es')) {
+        setLanguage('es');
+      } else if (userLang.startsWith('fr')) {
+        setLanguage('fr');
+      } else {
+        setLanguage('en');
+      }
+    })();
   </script>
 
 </body>
